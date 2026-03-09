@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remon Cloud</title>
+
+<style>
+
+body{
+margin:0;
+font-family:monospace;
+background:#000;
+color:white;
+overflow-x:hidden;
+}
+
+/* MATRIX BACKGROUND */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* NAVBAR */
+
+nav{
+background:#0a0a0a;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #00ff88;
+}
+
+.logo{
+color:#00ff88;
+font-size:22px;
+font-weight:bold;
+text-shadow:0 0 10px #00ff88;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:70px 20px;
+}
+
+.hero h1{
+font-size:34px;
+text-shadow:0 0 20px #00ff88;
+}
+
+/* CONTAINER */
+
+.container{
+padding:20px;
+max-width:900px;
+margin:auto;
+}
+
+/* CARD */
+
+.card{
+background:#0f0f0f;
+padding:25px;
+border-radius:10px;
+margin-bottom:25px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,255,120,0.3);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.03);
+box-shadow:0 0 40px rgba(0,255,120,0.6);
+}
+
+.price{
+color:#00ff88;
+font-size:28px;
+margin:10px;
+text-shadow:0 0 10px #00ff88;
+}
+
+button{
+background:#00ff88;
+border:none;
+padding:12px 25px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+box-shadow:0 0 15px #00ff88;
+}
+
+button:hover{
+box-shadow:0 0 30px #00ff88;
+}
+
+/* TERMINAL */
+
+.terminal{
+background:black;
+border:1px solid #00ff88;
+padding:20px;
+height:200px;
+overflow:auto;
+color:#00ff88;
+margin-top:30px;
+}
+
+/* ANIME CHARACTER */
+
+.anime{
+position:fixed;
+right:10px;
+bottom:0;
+width:150px;
+opacity:0.9;
+animation:float 4s infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+100%{transform:translateY(0)}
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<img class="anime" src="https://i.imgur.com/9XnKZ2S.png">
+
+<nav>
+
+<div class="logo">Remon Cloud</div>
+<div>Hosting • Panel • Dev</div>
+
+</nav>
+
+<div class="hero">
+
+<h1>Remon Cloud Premium SA-MP</h1>
+<p>Anti DDoS • Uptime 24 Jam • Stabil</p>
+
+</div>
+
+<div class="container">
+
+<h2>MENU HOSTING</h2>
+
+<div class="card">
+<h3>Paket 1</h3>
+<p>RAM 2500 • CPU 75%</p>
+<p>20 Slot Player</p>
+<div class="price">5K</div>
+<button onclick="order('Hosting Paket 1')">Order</button>
+</div>
+
+<div class="card">
+<h3>Paket 2</h3>
+<p>RAM 3000 • CPU 80%</p>
+<p>30 Slot Player</p>
+<div class="price">10K</div>
+<button onclick="order('Hosting Paket 2')">Order</button>
+</div>
+
+<div class="card">
+<h3>Paket 3</h3>
+<p>RAM 3000 • CPU 85%</p>
+<p>50 Slot Player</p>
+<div class="price">15K</div>
+<button onclick="order('Hosting Paket 3')">Order</button>
+</div>
+
+<div class="card">
+<h3>Paket 4</h3>
+<p>RAM 4500 • CPU 95%</p>
+<p>80 Slot Player</p>
+<div class="price">20K</div>
+<button onclick="order('Hosting Paket 4')">Order</button>
+</div>
+
+<h2>ADMIN PANEL</h2>
+
+<div class="card">
+
+<h3>PUB</h3>
+
+<ul>
+<li>AMD EPYC</li>
+<li>RAM DDR4</li>
+<li>DDoS Protection</li>
+<li>1Gbps Network</li>
+</ul>
+
+<div class="price">10K / bulan</div>
+
+<button onclick="order('Panel PUB')">Order</button>
+
+</div>
+
+<div class="terminal" id="terminal"></div>
+
+</div>
+
+<script>
+
+/* ORDER WA */
+
+function order(paket){
+
+window.open(
+"https://wa.me/6289677477066?text=Halo saya ingin order "+paket
+)
+
+}
+
+/* TERMINAL TEXT */
+
+let term=document.getElementById("terminal")
+
+let logs=[
+"Booting Remon Cloud system...",
+"Loading server modules...",
+"Connecting to cloud network...",
+"Security layer active...",
+"Server status : ONLINE ✔"
+]
+
+let i=0
+
+setInterval(()=>{
+
+if(i<logs.length){
+
+term.innerHTML+=logs[i]+"<br>"
+term.scrollTop=term.scrollHeight
+i++
+
+}
+
+},1500)
+
+/* MATRIX */
+
+var c=document.getElementById("matrix")
+var ctx=c.getContext("2d")
+
+c.height=window.innerHeight
+c.width=window.innerWidth
+
+var letters="REM0NCLOUD01"
+letters=letters.split("")
+
+var fontSize=14
+var columns=c.width/fontSize
+var drops=[]
+
+for(var x=0;x<columns;x++) drops[x]=1
+
+function draw(){
+
+ctx.fillStyle="rgba(0,0,0,0.05)"
+ctx.fillRect(0,0,c.width,c.height)
+
+ctx.fillStyle="#0F0"
+ctx.font=fontSize+"px monospace"
+
+for(var i=0;i<drops.length;i++){
+
+var text=letters[Math.floor(Math.random()*letters.length)]
+ctx.fillText(text,i*fontSize,drops[i]*fontSize)
+
+if(drops[i]*fontSize>c.height && Math.random()>0.975)
+drops[i]=0
+
+drops[i]++
+
+}
+
+}
+
+setInterval(draw,33)
+
+</script>
+
+</body>
+</html>
